@@ -15,7 +15,6 @@ namespace EvaluationSampleCode.Tests
       _stack = new CustomStack();
     }
 
-    #region Count Tests
     [TestMethod]
     public void Count_EmptyStack_ReturnsZero()
     {
@@ -45,9 +44,7 @@ namespace EvaluationSampleCode.Tests
 
       Assert.AreEqual(3, result);
     }
-    #endregion
 
-    #region Push Tests
     [TestMethod]
     public void Push_SingleValue_IncreasesCount()
     {
@@ -81,9 +78,7 @@ namespace EvaluationSampleCode.Tests
 
       Assert.AreEqual(1, _stack.Count());
     }
-    #endregion
 
-    #region Pop Tests
     [TestMethod]
     public void Pop_SingleElement_ReturnsElementAndDecreasesCount()
     {
@@ -157,9 +152,7 @@ namespace EvaluationSampleCode.Tests
 
       _stack.Pop();
     }
-    #endregion
 
-    #region Integration Tests
     [TestMethod]
     public void StackOperations_ComplexScenario_WorksCorrectly()
     {
@@ -186,6 +179,5 @@ namespace EvaluationSampleCode.Tests
       Assert.AreEqual(1, popped4);
       Assert.AreEqual(0, _stack.Count());
     }
-    #endregion
   }
 }

@@ -15,7 +15,6 @@ namespace EvaluationSampleCode.Tests
       _htmlHelper = new HtmlFormatHelper();
     }
 
-    #region GetBoldFormat Tests
     [TestMethod]
     public void GetBoldFormat_SimpleText_ReturnsBoldFormattedText()
     {
@@ -65,9 +64,7 @@ namespace EvaluationSampleCode.Tests
 
       Assert.AreEqual("<b><span>Test</span></b>", result);
     }
-    #endregion
 
-    #region GetItalicFormat Tests
     [TestMethod]
     public void GetItalicFormat_SimpleText_ReturnsItalicFormattedText()
     {
@@ -117,9 +114,7 @@ namespace EvaluationSampleCode.Tests
 
       Assert.AreEqual("<i><span>Test</span></i>", result);
     }
-    #endregion
 
-    #region GetFormattedListElements Tests
     [TestMethod]
     public void GetFormattedListElements_SingleElement_ReturnsCorrectHtmlList()
     {
@@ -194,9 +189,7 @@ namespace EvaluationSampleCode.Tests
 
       Assert.AreEqual("<ul><li><b>Bold</b></li><li><i>Italic</i></li><li><span>Span</span></li></ul>", result);
     }
-    #endregion
 
-    #region Integration Tests
     [TestMethod]
     public void HtmlFormatHelper_CombinedFormats_WorkTogether()
     {
@@ -208,6 +201,5 @@ namespace EvaluationSampleCode.Tests
 
       Assert.AreEqual("<ul><li><b>Bold Text</b></li><li><i>Italic Text</i></li></ul>", result);
     }
-    #endregion
   }
 }

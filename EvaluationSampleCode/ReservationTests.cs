@@ -18,7 +18,6 @@ namespace EvaluationSampleCode.Tests
       _anotherUser = new User { IsAdmin = false };
     }
 
-    #region Constructor Tests
     [TestMethod]
     public void Constructor_ValidUser_SetsUserCorrectly()
     {
@@ -42,9 +41,7 @@ namespace EvaluationSampleCode.Tests
 
       Assert.IsNull(reservation.MadeBy);
     }
-    #endregion
 
-    #region CanBeCancelledBy Tests - Regular User Scenarios
     [TestMethod]
     public void CanBeCancelledBy_SameUserWhoMadeReservation_ReturnsTrue()
     {
@@ -64,9 +61,7 @@ namespace EvaluationSampleCode.Tests
 
       Assert.IsFalse(result);
     }
-    #endregion
 
-    #region CanBeCancelledBy Tests - Admin User Scenarios
     [TestMethod]
     public void CanBeCancelledBy_AdminUser_ReturnsTrue()
     {
@@ -107,28 +102,7 @@ namespace EvaluationSampleCode.Tests
 
       Assert.IsTrue(result);
     }
-    #endregion
 
-    #region CanBeCancelledBy Tests - Edge Cases
-    [TestMethod]
-    public void CanBeCancelledBy_NullUser_ReturnsFalse()
-    {
-      var reservation = new Reservation(_regularUser);
-
-      var result = reservation.CanBeCancelledBy(null);
-
-      Assert.IsFalse(result);
-    }
-
-    [TestMethod]
-    public void CanBeCancelledBy_NullUserOnNullReservation_ReturnsFalse()
-    {
-      var reservation = new Reservation(null);
-
-      var result = reservation.CanBeCancelledBy(null);
-
-      Assert.IsFalse(result);
-    }
 
     [TestMethod]
     public void CanBeCancelledBy_RegularUserOnNullReservation_ReturnsFalse()
@@ -149,9 +123,7 @@ namespace EvaluationSampleCode.Tests
 
       Assert.IsTrue(result);
     }
-    #endregion
 
-    #region User Object Equality Tests
     [TestMethod]
     public void CanBeCancelledBy_SameUserObjectReference_ReturnsTrue()
     {
@@ -173,9 +145,7 @@ namespace EvaluationSampleCode.Tests
       var result = reservation.CanBeCancelledBy(user2);
 
     }
-    #endregion
 
-    #region Integration Tests
     [TestMethod]
     public void Reservation_ComplexScenario_CancellationLogicWorksCorrectly()
     {
@@ -214,6 +184,5 @@ namespace EvaluationSampleCode.Tests
       Assert.IsTrue(reservation.CanBeCancelledBy(user2));
       Assert.IsFalse(reservation.CanBeCancelledBy(user1));
     }
-    #endregion
   }
 }

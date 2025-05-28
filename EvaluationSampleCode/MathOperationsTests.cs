@@ -17,7 +17,6 @@ namespace EvaluationSampleCode.Tests
       _mathOps = new MathOperations();
     }
 
-    #region Add Tests with DataRow (OBLIGATOIRE)
     [TestMethod]
     [DataRow(2, 3, 5)]
     [DataRow(-1, 1, 0)]
@@ -54,9 +53,7 @@ namespace EvaluationSampleCode.Tests
 
       Assert.AreEqual(expected, result);
     }
-    #endregion
 
-    #region Divide Tests
     [TestMethod]
     public void Divide_PositiveNumbers_ReturnsCorrectQuotient()
     {
@@ -147,9 +144,7 @@ namespace EvaluationSampleCode.Tests
     {
       _mathOps.Divide(0, 0);
     }
-    #endregion
 
-    #region GetOddNumbers Tests
     [TestMethod]
     public void GetOddNumbers_PositiveLimit_ReturnsCorrectOddNumbers()
     {
@@ -273,9 +268,7 @@ namespace EvaluationSampleCode.Tests
 
       CollectionAssert.AreEqual(firstEnumeration, secondEnumeration);
     }
-    #endregion
 
-    #region Integration Tests
     [TestMethod]
     public void MathOperations_ComplexScenario_AllMethodsWorkTogether()
     {
@@ -289,6 +282,5 @@ namespace EvaluationSampleCode.Tests
       var expected = new List<int> { 1, 3, 5 };
       CollectionAssert.AreEqual(expected, oddNumbers);
     }
-    #endregion
   }
 }

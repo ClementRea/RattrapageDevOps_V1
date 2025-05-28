@@ -1,0 +1,81 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master, develop]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
+      - name: Restore dependencies
+        run: dotnet restore EvaluationSampleCode/EvaluationSampleCode.csproj
+
+      - name: Build project
+        run: dotnet build EvaluationSampleCode/EvaluationSampleCode.csproj --no-restore --configuration Release
+
+      - name: Run tests
+        run: dotnet test EvaluationSampleCode/EvaluationSampleCode.csproj --no-build --configuration Release --verbosity normal --collect:"XPlat Code Coverage"
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: "**/TestResults/"
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
+      - name: Restore dependencies
+        run: dotnet restore EvaluationSampleCode/EvaluationSampleCode.csproj
+
+      - name: Check code formatting
+        run: dotnet format EvaluationSampleCode/EvaluationSampleCode.csproj --verify-no-changes --verbosity diagnostic
+        continue-on-error: true
+
+      - name: Static code analysis
+        run: |
+          echo "Running static code analysis..."
+          dotnet build EvaluationSampleCode/EvaluationSampleCode.csproj --configuration Release --verbosity normal
+
+  security-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
+      - name: Restore dependencies
+        run: dotnet restore EvaluationSampleCode/EvaluationSampleCode.csproj
+
+      - name: Run security scan
+        run: |
+          echo "Running security scan..."
+          dotnet list EvaluationSampleCode/EvaluationSampleCode.csproj package --vulnerable --include-transitive || true
+          echo "Security scan completed"
